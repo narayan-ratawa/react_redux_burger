@@ -1,0 +1,5 @@
+export const REQUEST_DATA = 'REQUEST_DATA';
+export const RECEIVE_DATA = 'RECEIVE_DATA';
+
+export const REQUEST_CLIST = 'REQUEST_CLIST';
+export const RECEIVE_CLIST = 'RECEIVE_CLIST';
