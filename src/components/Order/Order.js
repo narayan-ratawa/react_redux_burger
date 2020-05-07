@@ -1,7 +1,6 @@
 import React from "react";
 import "./Order.css";
 const Order = (props) => {
-    console.log(props.data)
     const { data: { price, ingredents } } = props;
 
     const indrdients = [];

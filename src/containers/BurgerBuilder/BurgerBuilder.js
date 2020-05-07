@@ -17,51 +17,10 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount() {
-        // axios.get("https://burger-7fcc5.firebaseio.com/ingredients.json")
-        // .then(response =>{
-        //     console.log(response)
-        //     this.setState({ingredents:response.data})
-        // })
-        // .catch(error => this.setState({error:error})
-        // )
         this.props.onPurchaseInit()
         this.props.getInfridents()
     }
 
-    // addIngredentHandle = type => {
-    //     const oldCount = this.state.ingredents[type];
-    //     const updatedCount = oldCount + 1;
-    //     const updatedIngredents = {
-    //         ...this.state.ingredents
-    //     }
-    //     updatedIngredents[type] = updatedCount;
-    //     const additionPrice = INGREDENTS_PRICE[type];
-    //     const oldPrice = this.state.totalPrice;
-    //     const newPrice = oldPrice + additionPrice;
-    //     this.setState({
-    //         totalPrice: newPrice,
-    //         ingredents: updatedIngredents
-    //     })
-    // }
-
-    // removeIngredentHandle = type => {
-    //     const oldCount = this.state.ingredents[type];
-    //     if (oldCount) {
-    //         const updatedCount = oldCount - 1;
-    //         const updatedIngredents = {
-    //             ...this.state.ingredents
-    //         }
-    //         updatedIngredents[type] = updatedCount;
-    //         const dedictionPrice = INGREDENTS_PRICE[type];
-    //         const oldPrice = this.state.totalPrice;
-    //         const newPrice = oldPrice - dedictionPrice;
-    //         this.setState({
-    //             totalPrice: newPrice,
-    //             ingredents: updatedIngredents
-    //         })
-    //     }
-
-    // }
 
     handleModalVisible = (visible) => {
         if(this.props.token){
@@ -74,13 +33,6 @@ class BurgerBuilder extends Component {
 
     handleSuccessOrder = () => {
 
-        // const queryParams = [];
-        // for (let i in this.state.ingredents) {
-        //     queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredents[i]))
-        // }
-        // queryParams.push("price=" + this.props.totalPrice)
-        // const queryString = queryParams.join('&')
-
         this.props.history.push({
             pathname: '/checkout',
             // search: '?' + queryString
@@ -91,7 +43,6 @@ class BurgerBuilder extends Component {
 
 
     render() {
-        console.log(this.props.ings)
         const disableInfo = {
             ...this.props.ings
         }

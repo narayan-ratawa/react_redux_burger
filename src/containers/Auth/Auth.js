@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import { Redirect } from 'react-router-dom'
+import { checkValidity } from '../../store/util'
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
 import * as authActionCreator from "../../store/actions";
 import WithErrorHandler from "../../hoc/WithErrorHandler/WithErrorHandler";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import axios from "../../Axios-order"
-import { connect } from "react-redux";
-import { Redirect } from 'react-router-dom'
 import './Auth.css'
 
 
@@ -45,29 +46,6 @@ class Auth extends Component {
         formIsValid: false,
         isSignUp: true
     }
-    checkValidity = (value, rules) => {
-        let isValid = true;
-        if (rules.required) {
-            isValid = value.trim() !== ''
-        }
-        if (rules.minLength && isValid) {
-            isValid = value.length >= rules.minLength
-        }
-        if (rules.maxLength && isValid) {
-            isValid = value.length <= rules.maxLength
-        }
-        if (rules.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        return isValid;
-    }
 
     inputChangedHandler = (event, key) => {
         const updateOrderForm = {
@@ -77,7 +55,7 @@ class Auth extends Component {
             ...updateOrderForm[key]
         }
         updatedField.value = event.target.value;
-        updatedField.valid = this.checkValidity(updatedField.value, updatedField.validation)
+        updatedField.valid = checkValidity(updatedField.value, updatedField.validation)
 
         updatedField.touched = true;
         updateOrderForm[key] = updatedField;

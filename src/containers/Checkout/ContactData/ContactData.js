@@ -6,6 +6,7 @@ import axios from '../../../Axios-order'
 import WithErrorHandler from '../../../hoc/WithErrorHandler/WithErrorHandler'
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import * as orderActionCreator from '../../../store/actions'
+import { checkValidity} from '../../../store/util'
 import  "./ContactData.css";
 
 class ContactData extends Component{
@@ -93,31 +94,7 @@ class ContactData extends Component{
         },
         formIsValid:false
     }
-
-    checkValidity = (value,rules)=>{
-        let isValid = true;
-        if(rules.required){
-            isValid = value.trim() !== ''
-        }
-        if(rules.minLength && isValid){
-            isValid = value.length >= rules.minLength
-        }
-        if(rules.maxLength && isValid){
-            isValid = value.length <= rules.maxLength
-        }
-        if (rules.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        return isValid;
-    }
-
+    
     orderHandler = (event) =>{
         event.preventDefault();
         const formData = {}
@@ -141,7 +118,7 @@ class ContactData extends Component{
             ...updateOrderForm[key]
         }
         updatedField.value = event.target.value;
-        updatedField.valid = this.checkValidity(updatedField.value,updatedField.validation)
+        updatedField.valid = checkValidity(updatedField.value,updatedField.validation)
 
         updatedField.touched =true;
         updateOrderForm[key] = updatedField;

@@ -15,25 +15,10 @@ class Orders extends Component{
     }
 
     componentDidMount(){
-        console.log("miyo"+this.props.token+this.props.userId)
         this.props.fetchOrders(this.props.token,this.props.userId)
-        // axios.get("https://burger-7fcc5.firebaseio.com/orders.json")
-        // .then(response =>{
-        //     console.log(response)
-        //     let orders= [];
-        //     for(let item in response.data){
-        //         orders.push({...response.data[item],
-        //             id:item
-        //         })
-        //     }
-        //     this.setState({orders:orders,loading:false,error:null})
-        // })
-        // .catch(error => this.setState({error:error})
-        // )
     }
 
     render(){
-        console.log("data" + this.props.orders)
         let orders = <Spinner />
         if(!this.props.loading){
             
